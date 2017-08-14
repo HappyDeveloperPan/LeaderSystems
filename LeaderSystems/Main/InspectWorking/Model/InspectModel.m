@@ -1,0 +1,15 @@
+//
+//  InspectModel.m
+//  LeaderSystems
+//
+//  Created by 刘艳凯 on 2017/6/14.
+//  Copyright © 2017年 YiTu. All rights reserved.
+//
+
+#import "InspectModel.h"
+
+@implementation InspectModel
++ (NSDictionary *)objClassInArray {
+    return @{@"onLineStaff":[StaffWorkingModel class], @"notOnlineStaff":[StaffWorkingModel class]};
+}
+@end

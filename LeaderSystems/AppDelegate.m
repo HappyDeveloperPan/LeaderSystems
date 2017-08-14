@@ -7,16 +7,128 @@
 //
 
 #import "AppDelegate.h"
+#import <AvoidCrash/AvoidCrash.h>
+#import <SMS_SDK/SMSSDK.h>
+#import "LoginViewController.h"
+#import "PSTabBarViewController.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import "JPUSHService.h"
+#import "PSUser.h"
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
 
-@interface AppDelegate ()
+@interface AppDelegate ()<JPUSHRegisterDelegate>
 
 @end
+
+//注册函数, 崩溃日志
+void uncaughtExceptionHandler(NSException* exception)
+{
+    NSLog(@"CRASH: %@", exception);
+    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    // Internal error reporting
+    [Common catchEexceptionMailToDeveloperWithNSException:exception];
+}
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    // 注册异常监听
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
+    /******************高德地图**********************/
+    [AMapServices sharedServices].apiKey = kAMPApikey;
+    
+    /**********开启AvoidCrash************/
+    [AvoidCrash becomeEffective];
+    
+    /***************mob短信验证,初始化***************/
+    [SMSSDK registerApp:kMOBApp withSecret:kMOBSecret];
+    
+    /*******************极光推送*********************/
+    // 3.0.0及以后版本注册可以这样写，也可以继续用旧的注册方式
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        //    if ([[UIDevice currentDevice].systemVersion floatValue] >= 10.0) {
+        //      NSSet<UNNotificationCategory *> *categories;
+        //      entity.categories = categories;
+        //    }
+        //    else {
+        //      NSSet<UIUserNotificationCategory *> *categories;
+        //      entity.categories = categories;
+        //    }
+    }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+    //如不需要使用IDFA，advertisingIdentifier 可为nil
+    [JPUSHService setupWithOption:launchOptions appKey:kJPushAppkey channel:@"PatrolSystem channel" apsForProduction:NO advertisingIdentifier:nil];
+    //2.1.9版本新增获取registration id block接口。
+    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+        if(resCode == 0){
+            NSLog(@"registrationID获取成功：%@",registrationID);
+            [Common setAsynchronous:registrationID WithKey:kJPushRegisterId];
+        }
+        else{
+            NSLog(@"registrationID获取失败，code：%d",resCode);
+        }
+    }];
+    
+    /*******************键盘监听***********************/
+    IQKeyboardManager *manager =  [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;//这个是点击空白区域键盘收缩的开关
+    manager.enableAutoToolbar = NO;//这个是它自带键盘工具条开关
+    
+    
+    self.window = [[UIWindow alloc] initWithFrame:kMainScreenFrame];
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSString *versionNumber = infoDic[@"CFBundleShortVersionString"];
+    NSLog(@"版本号: %@", versionNumber);
+    NSString *runVersionNumber = [Common getAsynchronousWithKey:kRunVersion];
+    NSLog(@"现有版本号 : %@", runVersionNumber);
+    if (runVersionNumber == nil || ![runVersionNumber isEqualToString:versionNumber]) {
+        LoginViewController *loginVc = [LoginViewController new];
+        UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVc];
+        self.window.rootViewController = loginNav;
+    }else {
+        self.window.rootViewController = [PSTabBarViewController new];
+    }
+    [self.window makeKeyAndVisible];
+    //消息红点
+//    if ([Common getAsynchronousWithKey:kRedPoint]) {
+//        [UserManager sharedManager].showRedPoint = YES;
+//    }
+//    //首页消息角标
+//    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+//    if (userInfo) {
+//        PushModel *model = [PushModel parse:userInfo];
+//        if ([model.type isEqualToString:@"examineApprovePush"]) {
+//            [UserManager sharedManager].showRedPoint = YES;
+//            [Common setAsynchronous:@"redPoint" WithKey:kRedPoint];
+//            [kNotificationCenter postNotificationName:kReloadUser object:nil];
+//        }else {
+//            [kNotificationCenter postNotificationName:kShowRedBadge object:nil];
+//        }
+//    }
+    
+    
+    /********************全局配置*********************/
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    //顶部Nav栏设置
+    [UINavigationBar appearance].translucent = NO;
+    [UINavigationBar appearance].barTintColor = RGBColor(25, 182, 158);  //背景颜色
+    [UINavigationBar appearance].tintColor = kColorWhite;                 //返回按钮颜色
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:19],NSForegroundColorAttributeName:[UIColor whiteColor]}]; //标题颜色
+    
+    //底部Tabbar栏设置
+    [UITabBar appearance].translucent = NO;
+    [UITabBar appearance].tintColor = RGBColor(25, 182, 158);   //tab背景颜色
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: RGBColor(25, 182, 158)} forState:UIControlStateSelected];  //顶部按钮字体颜色
+    /*******************************************/
     return YES;
 }
 
@@ -35,6 +147,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    [application cancelAllLocalNotifications];
+//    [kNotificationCenter postNotificationName:kReloadUser object:nil];
 }
 
 
@@ -47,5 +161,147 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - 极光推送 Method
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
+    [JPUSHService registerDeviceToken:deviceToken];
+}
 
+- (void)application:(UIApplication *)application
+didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+- (void)application:(UIApplication *)application
+didRegisterUserNotificationSettings:
+(UIUserNotificationSettings *)notificationSettings {
+}
+
+// Called when your app has been activated by the user selecting an action from
+// a local notification.
+// A nil action identifier indicates the default action.
+// You should call the completion handler as soon as you've finished handling
+// the action.
+- (void)application:(UIApplication *)application
+handleActionWithIdentifier:(NSString *)identifier
+forLocalNotification:(UILocalNotification *)notification
+  completionHandler:(void (^)())completionHandler {
+}
+
+// Called when your app has been activated by the user selecting an action from
+// a remote notification.
+// A nil action identifier indicates the default action.
+// You should call the completion handler as soon as you've finished handling
+// the action.
+- (void)application:(UIApplication *)application
+handleActionWithIdentifier:(NSString *)identifier
+forRemoteNotification:(NSDictionary *)userInfo
+  completionHandler:(void (^)())completionHandler {
+}
+#endif
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"iOS6及以下系统，收到通知:%@", [self logDic:userInfo]);
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:
+(void (^)(UIBackgroundFetchResult))completionHandler {
+    [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"iOS7及以上系统，收到通知:%@", [self logDic:userInfo]);
+    
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)application:(UIApplication *)application
+didReceiveLocalNotification:(UILocalNotification *)notification {
+    [JPUSHService showLocalNotificationAtFront:notification identifierKey:nil];
+}
+
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#pragma mark- JPUSHRegisterDelegate
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    
+    UNNotificationRequest *request = notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+        PSUser *model = [PSUser parse:userInfo];
+        [kNotificationCenter postNotificationName:kShowRedBadge object:nil];
+        if ([model.type isEqualToString:@"emergencyCalling"]) {
+            [[WarningManager shareManager] startScreenFlicker];
+        }
+        NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
+    }
+    else {
+        // 判断为本地通知
+        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
+}
+
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+        [kNotificationCenter postNotificationName:kShowRedBadge object:nil];
+        PSUser *model = [PSUser parse:userInfo];
+        if ([model.type isEqualToString:@"emergencyCalling"]) {
+            [[WarningManager shareManager] startScreenFlicker];
+        }
+//        [[WarningManager shareManager] startScreenFlicker];
+        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
+    }
+    else {
+        // 判断为本地通知
+        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    completionHandler();  // 系统要求执行这个方法
+}
+#endif
+
+// log NSSet with UTF8
+// if not ,log will be \Uxxx
+- (NSString *)logDic:(NSDictionary *)dic {
+    if (![dic count]) {
+        return nil;
+    }
+    NSString *tempStr1 =
+    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
+                                                 withString:@"\\U"];
+    NSString *tempStr2 =
+    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    NSString *tempStr3 =
+    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *str =
+    [NSPropertyListSerialization propertyListFromData:tempData
+                                     mutabilityOption:NSPropertyListImmutable
+                                               format:NULL
+                                     errorDescription:NULL];
+    return str;
+}
 @end

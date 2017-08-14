@@ -1,0 +1,41 @@
+//
+//  PrefixHeader.pch
+//  LeaderSystems
+//
+//  Created by 刘艳凯 on 2017/6/2.
+//  Copyright © 2017年 YiTu. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#ifdef __OBJC__
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import "AppDelegate.h"
+
+#import "ToolsMacro.h"                               //全局宏定义
+#import "UrlPath.h"                                   //服务器接口类
+#import "Common.h"                                    //共通工具类
+#import "NSData+Extension.h"                        //NSDate分类
+#import "RXApiServiceEngine.h"                     //网络解析类
+#import "UIView+HUD.h"                               //忙提示
+#import "NSObject+MJExtension.h"                   //json解析类
+#import "UIScrollView+Refresh.h"                   //滚动视图头部和脚步刷新效果
+#import "UserManager.h"                              //用户管理类
+#import "JPUSHService.h"                            //极光推送
+#import "NSDate+Component.h"
+#import "WarningManager.h"                          //警报管理类
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+/******第三方********/
+#import <Masonry/Masonry.h>                                             //第三方布局库
+#import <YYKit/YYKit.h>                                                  //第三方UI组件类
+#import <IQKeyboardManager/IQKeyboardManager.h>                    //第三方键盘类
+
+
+#endif
+#endif /* PrefixHeader_pch */

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="KGk-i7-Jjw" customClass="AttendanceTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="496" height="92"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="496" height="91.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boy" translatesAutoresizingMaskIntoConstraints="NO" id="Rvl-iS-iEh">
+                        <rect key="frame" x="10" y="21" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="aTa-4V-JbQ"/>
+                            <constraint firstAttribute="width" constant="50" id="jbO-BV-Se2"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名: XXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vv7-ch-xBR">
+                        <rect key="frame" x="70" y="5" width="200" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="Qp7-Hk-Rkt"/>
+                            <constraint firstAttribute="height" constant="21" id="UAH-OS-uqW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工种: XX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xr0-vn-oqx">
+                        <rect key="frame" x="70" y="35.5" width="160" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="3i3-ot-P2V"/>
+                            <constraint firstAttribute="width" constant="160" id="bc8-n2-oda"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话: 99999999999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAe-Co-11d">
+                        <rect key="frame" x="70" y="65.5" width="200" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="9JH-la-iGM"/>
+                            <constraint firstAttribute="width" constant="200" id="DUX-KH-kdy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Xr0-vn-oqx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="AZW-Qd-2CB"/>
+                    <constraint firstItem="nAe-Co-11d" firstAttribute="leading" secondItem="Rvl-iS-iEh" secondAttribute="trailing" constant="10" id="Baz-6k-qBt"/>
+                    <constraint firstItem="vv7-ch-xBR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ima-1d-3YE"/>
+                    <constraint firstItem="Xr0-vn-oqx" firstAttribute="leading" secondItem="Rvl-iS-iEh" secondAttribute="trailing" constant="10" id="kaX-5K-3Cb"/>
+                    <constraint firstItem="Rvl-iS-iEh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="o4P-Je-Z05"/>
+                    <constraint firstItem="vv7-ch-xBR" firstAttribute="leading" secondItem="Rvl-iS-iEh" secondAttribute="trailing" constant="10" id="ora-uP-NNb"/>
+                    <constraint firstAttribute="bottom" secondItem="nAe-Co-11d" secondAttribute="bottom" constant="5" id="sow-IA-1Ow"/>
+                    <constraint firstItem="Rvl-iS-iEh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xeK-q9-9iJ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="headImg" destination="Rvl-iS-iEh" id="KD5-DP-vnj"/>
+                <outlet property="nameLb" destination="vv7-ch-xBR" id="r3c-5E-3iP"/>
+                <outlet property="phoneLb" destination="nAe-Co-11d" id="oj3-cM-xVl"/>
+                <outlet property="workTypeLb" destination="Xr0-vn-oqx" id="bDF-uy-8cR"/>
+            </connections>
+            <point key="canvasLocation" x="207" y="-153"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="boy" width="16" height="16"/>
+    </resources>
+</document>
