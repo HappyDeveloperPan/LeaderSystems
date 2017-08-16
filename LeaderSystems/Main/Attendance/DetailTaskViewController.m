@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *taskArr;
 @property (nonatomic, strong) NSArray *lineArr;
+@property (nonatomic, strong) UIView *headView;
 @end
 
 @implementation DetailTaskViewController
@@ -27,6 +28,7 @@
     if (self.staffModel.type_of_work_id == 1) {
         self.taskArr = self.taskModel.nowLocationdsInfos;
         self.lineArr = self.taskModel.theSecurityLineLatlngs;
+        self.tableView.tableHeaderView = self.headView;
     }
 }
 
@@ -108,6 +110,49 @@
         [self.view addSubview:_tableView];
     }
     return _tableView;
+}
+
+- (UIView *)headView {
+    if (!_headView) {
+        _headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 100)];
+        _headView.backgroundColor = kColorMain;
+        _headView.userInteractionEnabled = YES;
+        
+//        UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(25, (kMainScreenHeight * 0.2 - 100 ) / 2, 80, 80)];
+//        headImage.backgroundColor = [UIColor clearColor];
+//        headImage.layer.cornerRadius = 40;
+//        headImage.clipsToBounds = YES;
+//        if ([self.staffModel.staff_sex isEqualToString:@"男"]) {
+//            [headImage setImage:[UIImage imageNamed:@"boy"]];
+//        }else {
+//            [headImage setImage:[UIImage imageNamed:@"girl"]];
+//        }
+//        [_headView addSubview:headImage];
+        
+        
+        UILabel *lineLb = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, kMainScreenWidth - 20, 20)];
+        lineLb.text = [NSString stringWithFormat:@"路线: %@",self.taskModel.theSecurityLine.the_security_line_name];
+        lineLb.font = [UIFont systemFontOfSize:16];
+        lineLb.textColor = [UIColor whiteColor];
+        [_headView addSubview:lineLb];
+        
+        UILabel *startTimeLb = [[UILabel alloc] initWithFrame:CGRectMake(10, lineLb.bottom + 10, kMainScreenWidth - 20, 20)];
+        startTimeLb.text = [NSString stringWithFormat:@"开始时间: %@", self.taskModel.securityPatrolRecord.security_patrol_start_time];;
+        startTimeLb.font = [UIFont systemFontOfSize:16];
+        startTimeLb.textColor = [UIColor whiteColor];
+        [_headView addSubview:startTimeLb];
+        
+        UILabel *endTimeLb = [[UILabel alloc] initWithFrame:CGRectMake(10, startTimeLb.bottom + 10, kMainScreenWidth - 20, 20)];
+        if (self.taskModel.accomplishSecurityPatrolRecord.security_patrol_over_time) {
+            endTimeLb.text = [NSString stringWithFormat:@"完成时间: %@", self.taskModel.accomplishSecurityPatrolRecord.security_patrol_over_time];
+        }else {
+            endTimeLb.text = @"完成时间: 无";
+        }
+        endTimeLb.font = [UIFont systemFontOfSize:16];
+        endTimeLb.textColor = [UIColor whiteColor];
+        [_headView addSubview:endTimeLb];
+    }
+    return _headView;
 }
 
 - (NSArray *)taskArr {
