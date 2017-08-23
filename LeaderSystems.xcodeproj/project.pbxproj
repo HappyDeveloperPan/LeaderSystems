@@ -1380,6 +1380,7 @@
 			baseConfigurationReference = CB757949A1356120174E1E21 /* Pods-LeaderSystems.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = LeaderSystems/LeaderSystems.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = E2VG2C6XMR;
@@ -1407,6 +1408,7 @@
 			baseConfigurationReference = 7A6523AD6D8AC74E7D807EB7 /* Pods-LeaderSystems.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = LeaderSystems/LeaderSystems.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = E2VG2C6XMR;
