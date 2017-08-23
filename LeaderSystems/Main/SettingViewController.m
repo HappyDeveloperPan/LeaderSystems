@@ -20,7 +20,7 @@
 @end
 
 #define kMenuArr @[@"修改密码",@"关于逸途"]
-#define kImageArr @[@"icon_set",@"icon_Collection"]
+#define kImageArr @[@"icon_setting",@"icon_about"]
 
 @implementation SettingViewController
 #pragma mark - Life Circle
