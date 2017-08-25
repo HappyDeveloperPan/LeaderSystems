@@ -102,6 +102,7 @@
 		C64A41461EF12B9600B98266 /* StaffModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64A41451EF12B9600B98266 /* StaffModel.m */; };
 		C64A414A1EF139EA00B98266 /* InspectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C64A41481EF139EA00B98266 /* InspectTableViewCell.m */; };
 		C64A414B1EF139EA00B98266 /* InspectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64A41491EF139EA00B98266 /* InspectTableViewCell.xib */; };
+		C657425F1F4D6F33006374EF /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C657425E1F4D6F33006374EF /* WelcomeViewController.m */; };
 		C65802721EEA55040006A986 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C65802711EEA55040006A986 /* DetailsViewController.m */; };
 		C658027E1EEA99B00006A986 /* LZBCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = C65802751EEA99B00006A986 /* LZBCalendar.m */; };
 		C658027F1EEA99B00006A986 /* LZBCalendarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C65802771EEA99B00006A986 /* LZBCalendarHeaderView.m */; };
@@ -156,6 +157,10 @@
 		C6E29AB01EF7D7910099C713 /* HelpInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E29AAF1EF7D7910099C713 /* HelpInfoViewController.m */; };
 		C6E29AB31EF7DF050099C713 /* InfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E29AB21EF7DF050099C713 /* InfoDetailViewController.m */; };
 		C6E7D1441F14BEAF0091D925 /* HeadDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6E7D1431F14BEAF0091D925 /* HeadDateView.m */; };
+		C6FA72021F4E7390004C84E1 /* Welcome1.png in Resources */ = {isa = PBXBuildFile; fileRef = C6FA71FE1F4E7390004C84E1 /* Welcome1.png */; };
+		C6FA72031F4E7390004C84E1 /* Welcome2.png in Resources */ = {isa = PBXBuildFile; fileRef = C6FA71FF1F4E7390004C84E1 /* Welcome2.png */; };
+		C6FA72041F4E7390004C84E1 /* Welcome3.png in Resources */ = {isa = PBXBuildFile; fileRef = C6FA72001F4E7390004C84E1 /* Welcome3.png */; };
+		C6FA72051F4E7390004C84E1 /* Welcome4.png in Resources */ = {isa = PBXBuildFile; fileRef = C6FA72011F4E7390004C84E1 /* Welcome4.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -333,6 +338,8 @@
 		C64A41471EF139EA00B98266 /* InspectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectTableViewCell.h; sourceTree = "<group>"; };
 		C64A41481EF139EA00B98266 /* InspectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectTableViewCell.m; sourceTree = "<group>"; };
 		C64A41491EF139EA00B98266 /* InspectTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectTableViewCell.xib; sourceTree = "<group>"; };
+		C657425D1F4D6F33006374EF /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		C657425E1F4D6F33006374EF /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		C65802701EEA55040006A986 /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		C65802711EEA55040006A986 /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		C65802741EEA99B00006A986 /* LZBCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZBCalendar.h; sourceTree = "<group>"; };
@@ -436,6 +443,10 @@
 		C6E29AB21EF7DF050099C713 /* InfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoDetailViewController.m; sourceTree = "<group>"; };
 		C6E7D1421F14BEAF0091D925 /* HeadDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadDateView.h; sourceTree = "<group>"; };
 		C6E7D1431F14BEAF0091D925 /* HeadDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadDateView.m; sourceTree = "<group>"; };
+		C6FA71FE1F4E7390004C84E1 /* Welcome1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Welcome1.png; sourceTree = "<group>"; };
+		C6FA71FF1F4E7390004C84E1 /* Welcome2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Welcome2.png; sourceTree = "<group>"; };
+		C6FA72001F4E7390004C84E1 /* Welcome3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Welcome3.png; sourceTree = "<group>"; };
+		C6FA72011F4E7390004C84E1 /* Welcome4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Welcome4.png; sourceTree = "<group>"; };
 		CB757949A1356120174E1E21 /* Pods-LeaderSystems.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeaderSystems.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeaderSystems/Pods-LeaderSystems.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -573,6 +584,8 @@
 				C63F1CEA1EE158EA000BA493 /* AppDelegate.m */,
 				C681DF171EE541E2006BCFC3 /* PSTabBarViewController.h */,
 				C681DF181EE541E2006BCFC3 /* PSTabBarViewController.m */,
+				C657425D1F4D6F33006374EF /* WelcomeViewController.h */,
+				C657425E1F4D6F33006374EF /* WelcomeViewController.m */,
 				C63F1D031EE15B35000BA493 /* Define */,
 				C63F1D021EE15B2D000BA493 /* Category */,
 				C63F1D011EE15B25000BA493 /* Manager */,
@@ -598,6 +611,7 @@
 		C63F1CFD1EE15AF9000BA493 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C65742601F4D787A006374EF /* Images */,
 				C63F1CEF1EE158EA000BA493 /* Main.storyboard */,
 				C63F1CF21EE158EA000BA493 /* Assets.xcassets */,
 				C63F1CF41EE158EA000BA493 /* LaunchScreen.storyboard */,
@@ -840,6 +854,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C65742601F4D787A006374EF /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				C6FA71FE1F4E7390004C84E1 /* Welcome1.png */,
+				C6FA71FF1F4E7390004C84E1 /* Welcome2.png */,
+				C6FA72001F4E7390004C84E1 /* Welcome3.png */,
+				C6FA72011F4E7390004C84E1 /* Welcome4.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		C65802731EEA99A20006A986 /* LZBCalendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1071,14 +1096,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6FA72051F4E7390004C84E1 /* Welcome4.png in Resources */,
 				C6254F671F04F07B00B95589 /* DetailCheckTableViewCell.xib in Resources */,
 				C64915F01EF922E300BF5315 /* NotiInfoTableViewCell.xib in Resources */,
 				C64385261EE95340006B77AA /* AttendanceTableViewCell.xib in Resources */,
+				C6FA72021F4E7390004C84E1 /* Welcome1.png in Resources */,
 				C63F1CF61EE158EA000BA493 /* LaunchScreen.storyboard in Resources */,
 				C63F1CF31EE158EA000BA493 /* Assets.xcassets in Resources */,
 				C63F1CF11EE158EA000BA493 /* Main.storyboard in Resources */,
 				C634DCC51EE249C500FBFE78 /* private_key.p12 in Resources */,
 				C634DCC61EE249C500FBFE78 /* public_key.der in Resources */,
+				C6FA72041F4E7390004C84E1 /* Welcome3.png in Resources */,
+				C6FA72031F4E7390004C84E1 /* Welcome2.png in Resources */,
 				C64A414B1EF139EA00B98266 /* InspectTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1185,6 +1214,7 @@
 				C6425F191F0F707C009A0A5A /* RetroactiveListViewController.m in Sources */,
 				C681DF101EE53E27006BCFC3 /* NSDate+TimeInterval.m in Sources */,
 				C6425F251F0F71C6009A0A5A /* CriticizeModel.m in Sources */,
+				C657425F1F4D6F33006374EF /* WelcomeViewController.m in Sources */,
 				C6425F241F0F71C6009A0A5A /* ExamineApproveModel.m in Sources */,
 				C6254F761F04FA1500B95589 /* LocationModel.m in Sources */,
 				C64526301EFA6CC700864464 /* LookPhoto.m in Sources */,

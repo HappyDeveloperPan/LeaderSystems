@@ -14,6 +14,7 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import "JPUSHService.h"
 #import "PSUser.h"
+#import "WelcomeViewController.h"
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
@@ -91,9 +92,11 @@ void uncaughtExceptionHandler(NSException* exception)
     NSString *runVersionNumber = [Common getAsynchronousWithKey:kRunVersion];
     NSLog(@"现有版本号 : %@", runVersionNumber);
     if (runVersionNumber == nil || ![runVersionNumber isEqualToString:versionNumber]) {
-        LoginViewController *loginVc = [LoginViewController new];
-        UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVc];
-        self.window.rootViewController = loginNav;
+        WelcomeViewController *welcomeVc = [[WelcomeViewController alloc] init];
+        self.window.rootViewController = welcomeVc;
+//        LoginViewController *loginVc = [LoginViewController new];
+//        UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVc];
+//        self.window.rootViewController = loginNav;
     }else {
         self.window.rootViewController = [PSTabBarViewController new];
     }
@@ -285,6 +288,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 
 // log NSSet with UTF8
 // if not ,log will be \Uxxx
+#pragma mark - Method
 - (NSString *)logDic:(NSDictionary *)dic {
     if (![dic count]) {
         return nil;
