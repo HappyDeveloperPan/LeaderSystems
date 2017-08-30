@@ -98,7 +98,11 @@
     parameters[@"leader_account_password"] = [Common encryptString:self.passField.text publicKey:PublicKey];
     parameters[@"registration_code"] = self.invitationCodeField.text;
     parameters[@"appkey"] = kMOBApp;
-    parameters[@"regid"] = [Common getAsynchronousWithKey:kJPushRegisterId];
+    if ([Common getAsynchronousWithKey:kJPushRegisterId]) {
+        parameters[@"regid"] = [Common getAsynchronousWithKey:kJPushRegisterId];
+    }else {
+        parameters[@"regid"] = kJPushRegisterId;
+    }
     
     [RXApiServiceEngine requestWithType:RequestMethodTypePost url:kUrl_Register parameters:parameters completionHanlder:^(id jsonData, NSError *error) {
         if (jsonData) {

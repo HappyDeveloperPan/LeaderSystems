@@ -36,7 +36,6 @@
     
     [self headView];
     [self tableView];
-    
     [self logoutBtn];
 }
 

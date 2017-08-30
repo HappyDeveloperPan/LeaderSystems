@@ -22,7 +22,6 @@
     [super viewDidLoad];
     self.title = @"登录";
     self.view.backgroundColor = kColorBg;
-    
     [self creatLoginLabel];
 }
 
